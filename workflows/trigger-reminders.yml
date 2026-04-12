@@ -1,0 +1,18 @@
+name: Trigger Reminders
+
+on:
+  schedule:
+    - cron: '* * * * *'  # Every minute
+  workflow_dispatch:  # Manual trigger button
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Reminder Processing
+        run: |
+          curl -X POST \
+            https://allreminder.netlify.app/.netlify/functions/process-scheduled \
+            -H "Content-Type: application/json" \
+            -d '{}' \
+            --max-time 30
