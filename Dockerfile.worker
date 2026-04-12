@@ -1,0 +1,32 @@
+# ============================================
+# Worker Build Stage
+# ============================================
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+
+COPY package.json package-lock.json* ./
+RUN npm ci 2>/dev/null || npm install
+
+COPY . .
+RUN npx tsc --project tsconfig.worker.json
+
+# ============================================
+# Production Stage
+# ============================================
+FROM node:18-alpine AS runner
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+COPY package.json package-lock.json* ./
+RUN npm ci --omit=dev 2>/dev/null || npm install --omit=dev
+
+COPY --from=builder /app/dist/worker ./worker
+COPY --from=builder /app/dist/src ./src
+
+RUN addgroup -g 1001 -S worker && adduser -S workeruser -u 1001
+USER workeruser
+
+CMD ["node", "worker/queue.js"]
