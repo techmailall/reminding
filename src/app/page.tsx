@@ -64,11 +64,22 @@ export default function ReminderDashboard() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ reminder_id: reminder.id }),
       });
-
-      if (!response.ok) throw new Error('Trigger failed');
-      alert('Reminder triggered successfully!');
+  
+      const data = await response.json();
+  
+      if (!response.ok) {
+        alert('Error: ' + (data.error || 'Trigger failed'));
+        return;
+      }
+  
+      const r = data.results || {};
+      const lines = [];
+      if (r.email) lines.push('Email: ' + (r.email.ok ? '✅ Sent' : '❌ ' + r.email.error));
+      if (r.sms)   lines.push('SMS: '   + (r.sms.ok   ? '✅ Sent' : '❌ ' + r.sms.error));
+      if (r.call)  lines.push('Call: '  + (r.call.ok  ? '✅ Initiated' : '❌ ' + r.call.error));
+      alert(lines.length ? lines.join('\n') : 'Triggered (no channels enabled)');
     } catch {
-      alert('Failed to trigger reminder');
+      alert('Failed to reach server');
     }
   };
 
