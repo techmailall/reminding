@@ -111,7 +111,7 @@ async function sendEmail(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: `Automated Reminder System <${process.env.FROM_EMAIL || 'notifications@darkgarden.dev'}>`,
+        from: `Automated Reminder System <${process.env.FROM_EMAIL || 'onboarding@resend.dev'}>`,
         to: reminder.target_email,
         subject: `⏰ ${reminder.title} - Automated Notification`,
         html,

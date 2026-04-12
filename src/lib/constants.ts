@@ -1,19 +1,11 @@
 import type { EventType, TemplateType } from '@/types';
 
-// ============================================
-// Application Constants
-// ============================================
-
 export const APP_CONFIG = {
   name: 'Automated Reminder System',
   description: 'Dream-based notification infrastructure',
-  fromEmail: 'Reminders <noreply@yourdomain.com>',
-  notificationEmail: 'notifications@darkgarden.dev',
+  fromEmail: process.env.FROM_EMAIL || 'Reminders <onboarding@resend.dev>',
+  notificationEmail: process.env.FROM_EMAIL || 'onboarding@resend.dev',
 } as const;
-
-// ============================================
-// Validation Constants
-// ============================================
 
 export const VALIDATION = {
   phoneRegex: /^\+[1-9]\d{1,14}$/,
@@ -21,10 +13,6 @@ export const VALIDATION = {
   maxTitleLength: 200,
   maxDescriptionLength: 2000,
 } as const;
-
-// ============================================
-// Template Configuration
-// ============================================
 
 export const TEMPLATES: Record<TemplateType, { label: string; description: string }> = {
   elegant: {
@@ -49,20 +37,12 @@ export const TEMPLATES: Record<TemplateType, { label: string; description: strin
   },
 } as const;
 
-// ============================================
-// Event Type Labels
-// ============================================
-
 export const EVENT_TYPE_LABELS: Record<EventType, { label: string; color: string }> = {
   birthday: { label: 'Birthday', color: 'bg-pink-600' },
   anniversary: { label: 'Anniversary', color: 'bg-red-600' },
   class: { label: 'Class/Meeting', color: 'bg-blue-600' },
   custom: { label: 'Custom Event', color: 'bg-purple-600' },
 } as const;
-
-// ============================================
-// Cron & Timing
-// ============================================
 
 export const CRON_CONFIG = {
   checkInterval: '* * * * *',
