@@ -14,7 +14,15 @@ async function sendEmail(
 ): Promise<{ ok: boolean; error?: string }> {
   const gmailUser = process.env.GMAIL_USER;
   const gmailPass = process.env.GMAIL_APP_PASSWORD;
-  if (!gmailUser || !gmailPass) return { ok: false, error: 'GMAIL_USER or GMAIL_APP_PASSWORD not set' };
+
+  console.log('sendEmail - GMAIL_USER:', gmailUser ? 'set' : 'NOT SET');
+  console.log('sendEmail - GMAIL_APP_PASSWORD:', gmailPass ? 'set (length: ' + gmailPass.length + ')' : 'NOT SET');
+
+  if (!gmailUser || !gmailPass) {
+    const error = `GMAIL_USER (${gmailUser ? 'set' : 'NOT SET'}) or GMAIL_APP_PASSWORD (${gmailPass ? 'set' : 'NOT SET'}) not set`;
+    console.error(error);
+    return { ok: false, error };
+  }
   if (!reminder.target_email) return { ok: false, error: 'No email address on this reminder' };
 
   const vars = {
@@ -82,7 +90,7 @@ async function makeCall(reminder: Reminder): Promise<{ ok: boolean; error?: stri
   const sid = process.env.TWILIO_ACCOUNT_SID;
   const token = process.env.TWILIO_AUTH_TOKEN;
   const from = process.env.TWILIO_PHONE_NUMBER;
-  const webhookUrl = process.env.WEBHOOK_URL || 'https://remindingall.netlify.app';
+  const webhookUrl = process.env.WEBHOOK_URL || 'https://remindall.netlify.app';
   if (!sid || !token || !from) return { ok: false, error: 'Twilio env vars not set' };
   if (!reminder.target_phone) return { ok: false, error: 'No phone number on this reminder' };
 
@@ -117,31 +125,60 @@ async function makeCall(reminder: Reminder): Promise<{ ok: boolean; error?: stri
 }
 
 export async function POST(req: NextRequest) {
+  console.log('trigger-immediate API called at:', new Date().toISOString());
+
   try {
     const body = await req.json();
+    console.log('Request body:', body);
+
     const validation = triggerSchema.safeParse(body);
-    if (!validation.success) return NextResponse.json({ success: false, error: 'Invalid reminder ID' }, { status: 400 });
+    if (!validation.success) {
+      console.error('Validation failed:', validation.error);
+      return NextResponse.json({ success: false, error: 'Invalid reminder ID' }, { status: 400 });
+    }
 
     const { reminder_id } = validation.data;
+    console.log('Fetching reminder:', reminder_id);
+
     const reminder = await getReminderWithTemplate(reminder_id);
-    if (!reminder) return NextResponse.json({ success: false, error: 'Reminder not found' }, { status: 404 });
+    if (!reminder) {
+      console.error('Reminder not found:', reminder_id);
+      return NextResponse.json({ success: false, error: 'Reminder not found' }, { status: 404 });
+    }
+
+    console.log('Found reminder:', reminder.title, 'Email enabled:', reminder.email_enabled, 'Call enabled:', reminder.call_enabled);
+    console.log('Target email:', reminder.target_email, 'Target phone:', reminder.target_phone);
 
     await updateReminderStatus(reminder_id, 'processing');
 
     const results: Record<string, { ok: boolean; error?: string }> = {};
-    if (reminder.email_enabled && reminder.target_email) results.email = await sendEmail(reminder);
+
+    if (reminder.email_enabled && reminder.target_email) {
+      console.log('Sending email to:', reminder.target_email);
+      results.email = await sendEmail(reminder);
+      console.log('Email result:', results.email);
+    } else {
+      console.log('Skipping email - enabled:', reminder.email_enabled, 'has email:', !!reminder.target_email);
+    }
+
     if (reminder.call_enabled && reminder.target_phone) {
+      console.log('Sending SMS and making call to:', reminder.target_phone);
       results.sms = await sendSms(reminder);
       results.call = await makeCall(reminder);
+      console.log('SMS result:', results.sms, 'Call result:', results.call);
+    } else {
+      console.log('Skipping phone - enabled:', reminder.call_enabled, 'has phone:', !!reminder.target_phone);
     }
 
     const anySuccess = Object.values(results).some((r) => r.ok);
     const finalStatus = anySuccess ? 'completed' : 'failed';
+    console.log('Final status:', finalStatus, 'Any success:', anySuccess);
+
     await updateReminderStatus(reminder_id, finalStatus);
 
     return NextResponse.json({ success: anySuccess, results, status: finalStatus });
   } catch (error) {
     console.error('Trigger immediate error:', error);
-    return NextResponse.json({ success: false, error: 'Failed to trigger reminder' }, { status: 500 });
+    return NextResponse.json({ success: false, error: 'Failed to trigger reminder', details: String(error) }, { status: 500 });
   }
 }
