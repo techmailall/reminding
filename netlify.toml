@@ -4,9 +4,6 @@
 
 [build.environment]
   NODE_VERSION = "20"
-  NEXT_PUBLIC_SUPABASE_URL = "https://yqjjdrbozolfomzzmkuy.supabase.co"
-  NEXT_PUBLIC_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlxampkcmJvem9sZm9tenpta3V5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5OTA1NTIsImV4cCI6MjA5MTU2NjU1Mn0.F38ENnvwt2S-ahRdAS7lAprUAsOhtT18BqtrG5RT_Sk"
-  WEBHOOK_URL = "https://remindall.netlify.app"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
