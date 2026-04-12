@@ -1,9 +1,6 @@
-# Next.js on Netlify — https://docs.netlify.com/integrations/frameworks/next-js/overview/
 [build]
-  command = "npm run build"
+  command = "npm run build && node generate-headers.js"
+  publish = ".next"
 
 [build.environment]
-  NODE_VERSION = "20"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+  NODE_ENV = "production"
