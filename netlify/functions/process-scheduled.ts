@@ -36,7 +36,7 @@ const handler = schedule('* * * * *', async (event) => {
     return { statusCode: 200, body: JSON.stringify({ message: 'No reminders due' }) };
   }
 
-  const baseUrl = process.env.URL || 'https://remindall.netlify.app';
+  const baseUrl = process.env.URL || 'https://allremind.netlify.app';
   console.log('Using base URL:', baseUrl);
 
   const results = [];
