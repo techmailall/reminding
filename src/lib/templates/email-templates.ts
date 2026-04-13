@@ -281,11 +281,11 @@ function generateFunTemplate(vars: TemplateVariables): string {
     <div class="content">
       <p class="greeting">Dear Recipient,</p>
       <div class="event-card">
-        <div class="event-badge">${escapeHtml(vars.eventType.toUpperCase())}</div>
-        <h2 class="event-type">Celebration</h2>
+        <div class="event-badge">Wishes & Blessings</div>
+        <h2 class="event-type">For Today</h2>
         <div class="info-grid">
           <div class="info-item">
-            <span class="info-label">Description</span>
+            <p><span class="info-label">Description</span></p>
             <span class="info-value">${escapeHtml(vars.message)}</span>
           </div>
           <div class="date-box">
@@ -295,7 +295,6 @@ function generateFunTemplate(vars: TemplateVariables): string {
         </div>
       </div>
       ${vars.quote ? `<div class="quote-section">"${escapeHtml(vars.quote)}"</div>` : ''}
-      <p style="margin-top: 30px; color: #706860; font-size: 12px;">I wish you the best</p>
     </div>
     <div class="footer">
       <p>Sent with 💜 by the Reminder System</p>
