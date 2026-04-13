@@ -305,7 +305,6 @@ function generateFunTemplate(vars: TemplateVariables): string {
 
 function generateCorporateTemplate(vars: TemplateVariables): string {
   return `
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -535,8 +534,7 @@ function generateCorporateTemplate(vars: TemplateVariables): string {
     </div>
   </div>
 </body>
-</html>
-```;
+</html>`;
 }
 
 function generateRomanticTemplate(vars: TemplateVariables): string {
