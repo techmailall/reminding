@@ -28,18 +28,18 @@
     "csv-parse": "^5.5.3",
     "@netlify/functions": "^2.8.1",
     "zod": "^3.22.4",
-    "typescript": "^5.3.3"
-  },
-  "devDependencies": {
-    "@netlify/plugin-nextjs": "^5.0.0",
-    "@types/nodemailer": "^6.4.14",
-    "@types/node": "^20.10.0",
-    "@types/react-dom": "^18.2.18",
-    "@types/bull": "^4.10.0",
-    "@types/react": "^18.0.0",
     "tailwindcss": "^3.4.0",
     "postcss": "^8.4.32",
     "autoprefixer": "^10.4.16",
+    "typescript": "^5.3.3",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.18",
+    "@types/node": "^20.10.0",
+    "@types/nodemailer": "^6.4.14",
+    "@types/bull": "^4.10.0"
+  },
+  "devDependencies": {
+    "@netlify/plugin-nextjs": "^5.0.0",
     "ts-node": "^10.9.2",
     "eslint": "^8.56.0",
     "eslint-config-next": "14.0.4"
