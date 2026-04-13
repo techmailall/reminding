@@ -67,7 +67,7 @@ function generateElegantTemplate(vars: TemplateVariables): string {
     <div class="content">
       <p>Dear Recipient,</p>
       <div class="event-box">
-        <p><strong>Event Type:</strong> ${escapeHtml(vars.eventType.toUpperCase())}</p>
+        <p><strong>Event </strong> ${escapeHtml(vars.eventType.toUpperCase())}</p>
         <p><strong>Description:</strong> ${escapeHtml(vars.message)}</p>
         <p><strong>Scheduled Date:</strong> ${escapeHtml(vars.date)}</p>
       </div>
@@ -120,25 +120,183 @@ function generateFunTemplate(vars: TemplateVariables): string {
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${escapeHtml(vars.title)}</title>
   <style>
-    body { background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%); font-family: 'Comic Sans MS', 'Chalkboard SE', cursive; margin: 0; padding: 20px; }
-    .container { max-width: 600px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-    .header { background: #ff6b6b; padding: 30px; text-align: center; color: white; }
-    .content { padding: 30px; font-size: 18px; color: #333; }
-    .emoji { font-size: 40px; text-align: center; margin: 20px 0; }
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap');
+    
+    body { 
+      margin: 0; 
+      padding: 40px 20px; 
+      background-color: #1a1814; 
+      -webkit-font-smoothing: antialiased;
+      font-family: 'Lato', sans-serif;
+    }
+    
+    .container { 
+      max-width: 700px; 
+      margin: 0 auto; 
+      background: #222018;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    
+    .header { 
+      background: linear-gradient(135deg, #2d2820 0%, #3d3528 100%);
+      padding: 60px 50px; 
+      text-align: center;
+      position: relative;
+    }
+    
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: #d4af37;
+    }
+    
+    .header h1 { 
+      color: #f5f0e6; 
+      font-family: 'Playfair Display', serif; 
+      margin: 0; 
+      font-size: 46px; 
+      font-weight: 700;
+    }
+    
+    .content { 
+      padding: 50px; 
+      color: #c9c4b8; 
+      line-height: 1.8;
+      font-size: 17px;
+    }
+    
+    .greeting {
+      color: #e8e3d8;
+      font-size: 22px;
+      margin-bottom: 30px;
+      font-weight: 300;
+    }
+    
+    .event-card { 
+      background: #2a2520;
+      border-radius: 8px;
+      padding: 40px; 
+      margin: 35px 0;
+      border: 1px solid rgba(212,175,55,0.2);
+    }
+    
+    .event-badge {
+      display: inline-block;
+      background: rgba(212,175,55,0.15);
+      color: #d4af37;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    
+    .event-type {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      color: #f5f0e6;
+      margin: 0 0 25px 0;
+    }
+    
+    .info-grid {
+      display: grid;
+      gap: 20px;
+    }
+    
+    .info-item {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .info-label {
+      color: #8b8070;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+    
+    .info-value {
+      color: #e0dbd0;
+      font-size: 18px;
+    }
+    
+    .date-box {
+      background: rgba(212,175,55,0.1);
+      padding: 15px 20px;
+      border-radius: 6px;
+      border-left: 3px solid #d4af37;
+      margin-top: 20px;
+    }
+    
+    .quote-section {
+      margin-top: 40px;
+      padding: 30px;
+      text-align: center;
+      color: #a09070;
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-style: italic;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .footer { 
+      background: #1a1814; 
+      color: #5a5448; 
+      text-align: center; 
+      padding: 30px; 
+      font-size: 13px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    @media only screen and (max-width: 600px) {
+      body { padding: 20px 10px; }
+      .header { padding: 40px 30px; }
+      .header h1 { font-size: 34px; }
+      .content { padding: 30px; }
+      .event-card { padding: 30px; }
+    }
   </style>
+<base target="_blank">
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <h1>🎉 ${escapeHtml(vars.title)} 🎉</h1>
+      <h1>${escapeHtml(vars.title)}</h1>
     </div>
     <div class="content">
-      <div class="emoji">🎈🎊🎁</div>
-      <p>Hey there! 👋</p>
-      <p>Just reminding you about: <strong>${escapeHtml(vars.message)}</strong></p>
-      <p>Don't forget! It's happening on ${escapeHtml(vars.date)}</p>
-      <div class="emoji">🌟✨🌈</div>
+      <p class="greeting">Dear Recipient,</p>
+      <div class="event-card">
+        <div class="event-badge">${escapeHtml(vars.eventType.toUpperCase())}</div>
+        <h2 class="event-type">Celebration</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">Description</span>
+            <span class="info-value">${escapeHtml(vars.message)}</span>
+          </div>
+          <div class="date-box">
+            <span class="info-label" style="color: #d4af37; margin-bottom: 8px; display: block;">Scheduled Date</span>
+            <span class="info-value" style="color: #f5f0e6; font-size: 20px;">${escapeHtml(vars.date)}</span>
+          </div>
+        </div>
+      </div>
+      ${vars.quote ? `<div class="quote-section">"${escapeHtml(vars.quote)}"</div>` : ''}
+      <p style="margin-top: 40px; color: #706860; font-size: 15px;">This is an automated reminder from our system.</p>
+    </div>
+    <div class="footer">
+      <p>Sent with 💜 by the Automated Reminder System</p>
     </div>
   </div>
 </body>
@@ -147,38 +305,238 @@ function generateFunTemplate(vars: TemplateVariables): string {
 
 function generateCorporateTemplate(vars: TemplateVariables): string {
   return `
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${escapeHtml(vars.title)}</title>
   <style>
-    body { background-color: #f5f5f5; font-family: Arial, 'Helvetica Neue', sans-serif; margin: 0; padding: 20px; }
-    .container { max-width: 600px; margin: 0 auto; background: white; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; }
-    .header { background: #1a365d; padding: 30px; color: white; }
-    .content { padding: 30px; line-height: 1.6; color: #2d3748; }
-    .details { background: #edf2f7; padding: 15px; border-radius: 5px; margin: 20px 0; }
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;500&display=swap');
+    
+    body { 
+      margin: 0; 
+      padding: 0; 
+      background-color: #fafafa; 
+      -webkit-font-smoothing: antialiased;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .wrapper { 
+      width: 100%; 
+      max-width: 800px; 
+      margin: 0 auto; 
+      background: white;
+    }
+    
+    .hero { 
+      background: linear-gradient(160deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); 
+      padding: 80px 60px; 
+      text-align: center; 
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      opacity: 0.5;
+    }
+    
+    .hero h1 { 
+      color: #fff; 
+      font-family: 'Cormorant Garamond', Georgia, serif; 
+      margin: 0; 
+      font-size: 56px; 
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      position: relative;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .hero-accent {
+      width: 60px;
+      height: 2px;
+      background: #e94560;
+      margin: 30px auto 0;
+      position: relative;
+    }
+    
+    .main-content { 
+      padding: 60px; 
+      font-family: 'Montserrat', sans-serif;
+      color: #2c3e50; 
+      line-height: 1.8;
+      font-size: 18px;
+    }
+    
+    .greeting {
+      font-size: 24px;
+      font-weight: 300;
+      color: #1a1a2e;
+      margin-bottom: 40px;
+      letter-spacing: 0.5px;
+    }
+    
+    .event-display { 
+      background: linear-gradient(to right, #f8f9fa 0%, #ffffff 100%);
+      border: none;
+      padding: 50px; 
+      margin: 40px 0; 
+      position: relative;
+    }
+    
+    .event-display::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #e94560;
+    }
+    
+    .event-label {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #e94560;
+      margin-bottom: 10px;
+      display: block;
+    }
+    
+    .event-type {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 36px;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin: 0 0 25px 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .event-detail {
+      margin: 20px 0;
+      font-size: 17px;
+      color: #555;
+      line-height: 1.7;
+    }
+    
+    .event-detail strong {
+      color: #1a1a2e;
+      font-weight: 500;
+      display: inline-block;
+      width: 140px;
+    }
+    
+    .date-highlight {
+      font-size: 20px;
+      color: #0f3460;
+      font-weight: 500;
+      margin-top: 10px;
+    }
+    
+    .quote-section {
+      margin: 50px 0;
+      padding: 40px;
+      background: #1a1a2e;
+      color: #fff;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 28px;
+      font-style: italic;
+      line-height: 1.4;
+      text-align: center;
+      position: relative;
+    }
+    
+    .quote-section::before {
+      content: '"';
+      font-size: 80px;
+      position: absolute;
+      top: 10px;
+      left: 30px;
+      opacity: 0.2;
+      font-family: Georgia, serif;
+    }
+    
+    .closing {
+      margin-top: 50px;
+      padding-top: 30px;
+      border-top: 1px solid #eee;
+      color: #666;
+      font-size: 16px;
+    }
+    
+    .footer { 
+      background: #1a1a2e; 
+      color: rgba(255,255,255,0.6); 
+      text-align: center; 
+      padding: 40px; 
+      font-size: 13px;
+      letter-spacing: 1px;
+      font-weight: 300;
+    }
+    
+    .footer-heart {
+      color: #e94560;
+      font-size: 16px;
+    }
+    
+    @media only screen and (max-width: 600px) {
+      .hero { padding: 50px 30px; }
+      .hero h1 { font-size: 40px; }
+      .main-content { padding: 40px 30px; font-size: 16px; }
+      .event-display { padding: 35px; }
+      .event-type { font-size: 28px; }
+      .quote-section { font-size: 22px; padding: 30px; }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1 style="margin: 0; font-size: 24px;">BUSINESS REMINDER</h1>
+  <div class="wrapper">
+    <div class="hero">
+      <h1>${escapeHtml(vars.title)}</h1>
+      <div class="hero-accent"></div>
     </div>
-    <div class="content">
-      <p>Dear Valued Contact,</p>
-      <p>This is a formal notification regarding:</p>
-      <div class="details">
-        <p><strong>Subject:</strong> ${escapeHtml(vars.title)}</p>
-        <p><strong>Category:</strong> ${escapeHtml(vars.eventType)}</p>
-        <p><strong>Details:</strong> ${escapeHtml(vars.message)}</p>
-        <p><strong>Date/Time:</strong> ${escapeHtml(vars.date)}</p>
+    
+    <div class="main-content">
+      <p class="greeting">Dear Valued Contact,</p>
+      
+      <div class="event-display">
+        <span class="event-label">This is a formal notification regarding:</span>
+        <h2 class="event-type">${escapeHtml(vars.eventType.toUpperCase())}</h2>
+        
+        <div class="event-detail">
+          <strong>Description:</strong> ${escapeHtml(vars.message)}
+        </div>
+        
+        <div class="event-detail date-highlight">
+          <strong>Scheduled Date:</strong> ${escapeHtml(vars.date)}
+        </div>
       </div>
-      <p>Please take necessary action.</p>
-      <p>Best regards,<br>Automated Systems Division</p>
+      
+      ${vars.quote ? `<div class="quote-section">${escapeHtml(vars.quote)}</div>` : ''}
+      
+      <div class="closing">
+        <p>This is an automated reminder from our system.</p>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <p>Sent with <span class="footer-heart">💜</span> by the Automated Reminder System</p>
     </div>
   </div>
 </body>
-</html>`;
+</html>
+```;
 }
 
 function generateRomanticTemplate(vars: TemplateVariables): string {
@@ -201,7 +559,7 @@ function generateRomanticTemplate(vars: TemplateVariables): string {
     <h1>${escapeHtml(vars.title)}</h1>
     <div class="heart">❤️ 💕 ❤️</div>
     <div class="content">
-      <p>My Dearest,</p>
+      <p>Dear Recipient,</p>
       <p>${escapeHtml(vars.message)}</p>
       <p>Mark your calendar for ${escapeHtml(vars.date)}.</p>
       <p style="color: #e53e3e; margin-top: 30px;">With all my love,<br>Your Automated Companion</p>
