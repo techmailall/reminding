@@ -295,10 +295,10 @@ function generateFunTemplate(vars: TemplateVariables): string {
         </div>
       </div>
       ${vars.quote ? `<div class="quote-section">"${escapeHtml(vars.quote)}"</div>` : ''}
-      <p style="margin-top: 30px; color: #706860; font-size: 12px;">This is an automated reminder from our system.</p>
+      <p style="margin-top: 30px; color: #706860; font-size: 12px;">I wish you the best</p>
     </div>
     <div class="footer">
-      <p>Sent with 💜 by the Automated Reminder System</p>
+      <p>Sent with 💜 by the Reminder System</p>
     </div>
   </div>
 </body>
@@ -527,12 +527,12 @@ function generateCorporateTemplate(vars: TemplateVariables): string {
       ${vars.quote ? `<div class="quote-section">${escapeHtml(vars.quote)}</div>` : ''}
       
       <div class="closing">
-        <p>This is an automated reminder from our system.</p>
+        <p>This is a reminder from our system.</p>
       </div>
     </div>
     
     <div class="footer">
-      <p>Sent with <span class="footer-heart">💜</span> by the Automated Reminder System</p>
+      <p>Sent with <span class="footer-heart">💜</span> by the Reminder System</p>
     </div>
   </div>
 </body>
@@ -562,7 +562,7 @@ function generateRomanticTemplate(vars: TemplateVariables): string {
       <p>Dear Recipient,</p>
       <p>${escapeHtml(vars.message)}</p>
       <p>Mark your calendar for ${escapeHtml(vars.date)}.</p>
-      <p style="color: #e53e3e; margin-top: 30px;">With all my love,<br>Your Automated Companion</p>
+      <p style="color: #e53e3e; margin-top: 30px;">With all my love,<br>Your Assistant</p>
     </div>
   </div>
 </body>
