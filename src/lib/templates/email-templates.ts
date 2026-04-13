@@ -127,23 +127,23 @@ function generateFunTemplate(vars: TemplateVariables): string {
     
     body { 
       margin: 0; 
-      padding: 40px 20px; 
+      padding: 20px 10px; 
       background-color: #1a1814; 
       -webkit-font-smoothing: antialiased;
-      font-family: 'Lato', sans-serif;
+      font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
     }
     
     .container { 
-      max-width: 700px; 
+      max-width: 600px; 
       margin: 0 auto; 
       background: #222018;
-      border-radius: 12px;
+      border-radius: 8px;
       overflow: hidden;
     }
     
     .header { 
       background: linear-gradient(135deg, #2d2820 0%, #3d3528 100%);
-      padding: 60px 50px; 
+      padding: 40px 30px; 
       text-align: center;
       position: relative;
     }
@@ -154,38 +154,38 @@ function generateFunTemplate(vars: TemplateVariables): string {
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 100px;
-      height: 3px;
+      width: 60px;
+      height: 2px;
       background: #d4af37;
     }
     
     .header h1 { 
       color: #f5f0e6; 
-      font-family: 'Playfair Display', serif; 
+      font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; 
       margin: 0; 
-      font-size: 46px; 
+      font-size: 28px; 
       font-weight: 700;
     }
     
     .content { 
-      padding: 50px; 
+      padding: 30px; 
       color: #c9c4b8; 
-      line-height: 1.8;
-      font-size: 17px;
+      line-height: 1.6;
+      font-size: 13px;
     }
     
     .greeting {
       color: #e8e3d8;
-      font-size: 22px;
-      margin-bottom: 30px;
+      font-size: 16px;
+      margin-bottom: 20px;
       font-weight: 300;
     }
     
     .event-card { 
       background: #2a2520;
-      border-radius: 8px;
-      padding: 40px; 
-      margin: 35px 0;
+      border-radius: 6px;
+      padding: 25px; 
+      margin: 25px 0;
       border: 1px solid rgba(212,175,55,0.2);
     }
     
@@ -193,25 +193,25 @@ function generateFunTemplate(vars: TemplateVariables): string {
       display: inline-block;
       background: rgba(212,175,55,0.15);
       color: #d4af37;
-      padding: 8px 20px;
-      border-radius: 20px;
-      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 15px;
+      font-size: 10px;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       font-weight: 700;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
     
     .event-type {
-      font-family: 'Playfair Display', serif;
-      font-size: 32px;
+      font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      font-size: 22px;
       color: #f5f0e6;
-      margin: 0 0 25px 0;
+      margin: 0 0 18px 0;
     }
     
     .info-grid {
       display: grid;
-      gap: 20px;
+      gap: 15px;
     }
     
     .info-item {
@@ -221,32 +221,32 @@ function generateFunTemplate(vars: TemplateVariables): string {
     
     .info-label {
       color: #8b8070;
-      font-size: 13px;
+      font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 1px;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
     
     .info-value {
       color: #e0dbd0;
-      font-size: 18px;
+      font-size: 14px;
     }
     
     .date-box {
       background: rgba(212,175,55,0.1);
-      padding: 15px 20px;
-      border-radius: 6px;
-      border-left: 3px solid #d4af37;
-      margin-top: 20px;
+      padding: 12px 15px;
+      border-radius: 4px;
+      border-left: 2px solid #d4af37;
+      margin-top: 15px;
     }
     
     .quote-section {
-      margin-top: 40px;
-      padding: 30px;
+      margin-top: 25px;
+      padding: 20px;
       text-align: center;
       color: #a09070;
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
+      font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      font-size: 15px;
       font-style: italic;
       border-top: 1px solid rgba(255,255,255,0.1);
       border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -256,17 +256,19 @@ function generateFunTemplate(vars: TemplateVariables): string {
       background: #1a1814; 
       color: #5a5448; 
       text-align: center; 
-      padding: 30px; 
-      font-size: 13px;
+      padding: 20px; 
+      font-size: 11px;
       border-top: 1px solid rgba(255,255,255,0.05);
     }
     
     @media only screen and (max-width: 600px) {
-      body { padding: 20px 10px; }
-      .header { padding: 40px 30px; }
-      .header h1 { font-size: 34px; }
-      .content { padding: 30px; }
-      .event-card { padding: 30px; }
+      body { padding: 15px 8px; }
+      .header { padding: 30px 25px; }
+      .header h1 { font-size: 24px; }
+      .content { padding: 25px; font-size: 12px; }
+      .event-card { padding: 20px; }
+      .event-type { font-size: 20px; }
+      .quote-section { font-size: 14px; padding: 18px; }
     }
   </style>
 <base target="_blank">
@@ -287,13 +289,13 @@ function generateFunTemplate(vars: TemplateVariables): string {
             <span class="info-value">${escapeHtml(vars.message)}</span>
           </div>
           <div class="date-box">
-            <span class="info-label" style="color: #d4af37; margin-bottom: 8px; display: block;">Scheduled Date</span>
-            <span class="info-value" style="color: #f5f0e6; font-size: 20px;">${escapeHtml(vars.date)}</span>
+            <span class="info-label" style="color: #d4af37; margin-bottom: 6px; display: block;">Scheduled Date</span>
+            <span class="info-value" style="color: #f5f0e6; font-size: 16px;">${escapeHtml(vars.date)}</span>
           </div>
         </div>
       </div>
       ${vars.quote ? `<div class="quote-section">"${escapeHtml(vars.quote)}"</div>` : ''}
-      <p style="margin-top: 40px; color: #706860; font-size: 15px;">This is an automated reminder from our system.</p>
+      <p style="margin-top: 30px; color: #706860; font-size: 12px;">This is an automated reminder from our system.</p>
     </div>
     <div class="footer">
       <p>Sent with 💜 by the Automated Reminder System</p>
@@ -319,19 +321,19 @@ function generateCorporateTemplate(vars: TemplateVariables): string {
       padding: 0; 
       background-color: #fafafa; 
       -webkit-font-smoothing: antialiased;
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
     }
     
     .wrapper { 
       width: 100%; 
-      max-width: 800px; 
+      max-width: 600px; 
       margin: 0 auto; 
       background: white;
     }
     
     .hero { 
       background: linear-gradient(160deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); 
-      padding: 80px 60px; 
+      padding: 50px 40px; 
       text-align: center; 
       position: relative;
       overflow: hidden;
@@ -351,9 +353,9 @@ function generateCorporateTemplate(vars: TemplateVariables): string {
     
     .hero h1 { 
       color: #fff; 
-      font-family: 'Cormorant Garamond', Georgia, serif; 
+      font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif; 
       margin: 0; 
-      font-size: 56px; 
+      font-size: 36px; 
       font-weight: 600;
       letter-spacing: -0.5px;
       position: relative;
@@ -361,34 +363,34 @@ function generateCorporateTemplate(vars: TemplateVariables): string {
     }
     
     .hero-accent {
-      width: 60px;
+      width: 40px;
       height: 2px;
       background: #e94560;
-      margin: 30px auto 0;
+      margin: 20px auto 0;
       position: relative;
     }
     
     .main-content { 
-      padding: 60px; 
-      font-family: 'Montserrat', sans-serif;
+      padding: 40px; 
+      font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
       color: #2c3e50; 
-      line-height: 1.8;
-      font-size: 18px;
+      line-height: 1.6;
+      font-size: 14px;
     }
     
     .greeting {
-      font-size: 24px;
+      font-size: 18px;
       font-weight: 300;
       color: #1a1a2e;
-      margin-bottom: 40px;
+      margin-bottom: 25px;
       letter-spacing: 0.5px;
     }
     
     .event-display { 
       background: linear-gradient(to right, #f8f9fa 0%, #ffffff 100%);
       border: none;
-      padding: 50px; 
-      margin: 40px 0; 
+      padding: 30px; 
+      margin: 25px 0; 
       position: relative;
     }
     
@@ -398,58 +400,58 @@ function generateCorporateTemplate(vars: TemplateVariables): string {
       left: 0;
       top: 0;
       bottom: 0;
-      width: 4px;
+      width: 3px;
       background: #e94560;
     }
     
     .event-label {
       text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size: 12px;
+      letter-spacing: 2px;
+      font-size: 10px;
       font-weight: 500;
       color: #e94560;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       display: block;
     }
     
     .event-type {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 36px;
+      font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+      font-size: 24px;
       font-weight: 600;
       color: #1a1a2e;
-      margin: 0 0 25px 0;
+      margin: 0 0 15px 0;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
     
     .event-detail {
-      margin: 20px 0;
-      font-size: 17px;
+      margin: 12px 0;
+      font-size: 13px;
       color: #555;
-      line-height: 1.7;
+      line-height: 1.5;
     }
     
     .event-detail strong {
       color: #1a1a2e;
       font-weight: 500;
       display: inline-block;
-      width: 140px;
+      width: 110px;
     }
     
     .date-highlight {
-      font-size: 20px;
+      font-size: 14px;
       color: #0f3460;
       font-weight: 500;
-      margin-top: 10px;
+      margin-top: 8px;
     }
     
     .quote-section {
-      margin: 50px 0;
-      padding: 40px;
+      margin: 30px 0;
+      padding: 25px;
       background: #1a1a2e;
       color: #fff;
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 28px;
+      font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+      font-size: 18px;
       font-style: italic;
       line-height: 1.4;
       text-align: center;
@@ -458,44 +460,44 @@ function generateCorporateTemplate(vars: TemplateVariables): string {
     
     .quote-section::before {
       content: '"';
-      font-size: 80px;
+      font-size: 50px;
       position: absolute;
-      top: 10px;
-      left: 30px;
+      top: 5px;
+      left: 20px;
       opacity: 0.2;
       font-family: Georgia, serif;
     }
     
     .closing {
-      margin-top: 50px;
-      padding-top: 30px;
+      margin-top: 30px;
+      padding-top: 20px;
       border-top: 1px solid #eee;
       color: #666;
-      font-size: 16px;
+      font-size: 12px;
     }
     
     .footer { 
       background: #1a1a2e; 
       color: rgba(255,255,255,0.6); 
       text-align: center; 
-      padding: 40px; 
-      font-size: 13px;
+      padding: 25px; 
+      font-size: 11px;
       letter-spacing: 1px;
       font-weight: 300;
     }
     
     .footer-heart {
       color: #e94560;
-      font-size: 16px;
+      font-size: 12px;
     }
     
     @media only screen and (max-width: 600px) {
-      .hero { padding: 50px 30px; }
-      .hero h1 { font-size: 40px; }
-      .main-content { padding: 40px 30px; font-size: 16px; }
-      .event-display { padding: 35px; }
-      .event-type { font-size: 28px; }
-      .quote-section { font-size: 22px; padding: 30px; }
+      .hero { padding: 35px 25px; }
+      .hero h1 { font-size: 28px; }
+      .main-content { padding: 30px 25px; font-size: 13px; }
+      .event-display { padding: 25px; }
+      .event-type { font-size: 20px; }
+      .quote-section { font-size: 16px; padding: 20px; }
     }
   </style>
 </head>
@@ -507,10 +509,10 @@ function generateCorporateTemplate(vars: TemplateVariables): string {
     </div>
     
     <div class="main-content">
-      <p class="greeting">Dear Valued Contact,</p>
+      <p class="greeting">Dear Recipient,</p>
       
       <div class="event-display">
-        <span class="event-label">This is a formal notification regarding:</span>
+        <span class="event-label">Event Notification</span>
         <h2 class="event-type">${escapeHtml(vars.eventType.toUpperCase())}</h2>
         
         <div class="event-detail">
