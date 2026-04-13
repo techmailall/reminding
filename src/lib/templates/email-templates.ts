@@ -285,7 +285,7 @@ function generateFunTemplate(vars: TemplateVariables): string {
         <h2 class="event-type">For Today</h2>
         <div class="info-grid">
           <div class="info-item">
-            <p><span class="info-label">Description</span></p>
+           
             <span class="info-value">${escapeHtml(vars.message)}</span>
           </div>
           <div class="date-box">
@@ -512,7 +512,7 @@ function generateCorporateTemplate(vars: TemplateVariables): string {
       
       <div class="event-display">
         <span class="event-label">Event Notification</span>
-        <h2 class="event-type">${escapeHtml(vars.eventType.toUpperCase())}</h2>
+        
         
         <div class="event-detail">
           <strong>Description:</strong> ${escapeHtml(vars.message)}
